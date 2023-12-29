@@ -15,6 +15,8 @@ bool isPossible(int *arr, int n)
             if (count > 1) {
                 return false;
             }
+
+            // to check which elements to change 
             
             if (i > 0 && arr[i - 1] > arr[i + 1]) {
                 arr[i + 1] = arr[i]; 
