@@ -1,0 +1,17 @@
+/*You are given a string s. You need to reverse the string.*/
+
+#include <bits/stdc++.h> 
+string reverseWord(string str)
+    {
+        // Your code goes here
+        int low = 0 ; 
+        int high = str.size()-1 ;
+        
+        while(low<high){
+            swap(str[low] , str[high]) ;
+            low++ ;
+            high-- ;
+        }
+        
+        return str ;
+    }
