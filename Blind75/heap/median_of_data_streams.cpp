@@ -8,37 +8,54 @@
 // void addNum(int num) adds the integer num from the data stream to the data structure.
 // double findMedian() returns the median of all elements so far. Answers within 10-5 of the actual answer will be accepted.
 
-vector<int> findMedian(vector<int> &arr, int n){
-	
-	// Write your code here 
-	vector<int> result;
-    priority_queue<int> maxpq; // Max heap for smaller half elements
-    priority_queue<int, std::vector<int>,greater<int>> minpq; // Min heap for larger half elements
-    
-    for (int i = 0; i < n; ++i) {
-        // Insert element into the appropriate heap
-        if (maxpq.empty() || arr[i] <= maxpq.top()) {
-            maxpq.push(arr[i]);
-        } else {
-            minpq.push(arr[i]);
-        }
+class MedianFinder {
+    priority_queue<int>maxpq ; 
+    priority_queue<int , vector<int> , greater<int>>minpq ; 
+
+public:
+    MedianFinder() {
+
         
-        // Balance the heaps
-        if (maxpq.size() > minpq.size() + 1) {
-            minpq.push(maxpq.top());
-            maxpq.pop();
-        } else if (minpq.size() > maxpq.size()) {
-            maxpq.push(minpq.top());
-            minpq.pop();
-        }
-        
-        // Calculate median based on the sizes of the heaps
-        if (maxpq.size() == minpq.size()) {
-            result.push_back((maxpq.top() + minpq.top()) / 2);
-        } else {
-            result.push_back(maxpq.top());
-        }
     }
     
-    return result;
-}
+    void addNum(int num) {
+        if(maxpq.empty() || num<maxpq.top()){
+            maxpq.push(num) ; 
+
+        }
+
+        else {
+            minpq.push(num) ; 
+        }
+
+        if(maxpq.size()>minpq.size()+1){
+            minpq.push(maxpq.top()) ; 
+            maxpq.pop() ; 
+        }
+
+        else if(minpq.size()>maxpq.size()+1){
+            maxpq.push(minpq.top()) ; 
+            minpq.pop() ; 
+        }
+        
+    }
+    
+    double findMedian() {
+        if(maxpq.size()==minpq.size()){
+            return (maxpq.top()+minpq.top())/2.0 ; 
+
+        }
+
+        else {
+            if(minpq.size()>maxpq.size()){
+                return minpq.top() ; 
+            }
+
+            else {
+                return maxpq.top() ; 
+            }
+        }
+        
+    }
+};
+
