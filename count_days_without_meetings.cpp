@@ -9,17 +9,17 @@ public:
         
         int n=arr.size();
         
-        int s=arr[0][0], e=arr[0][1];
+        int start=arr[0][0], end=arr[0][1];
         for(int i=1;i<n;i++){
-            int si=arr[i][0], ei=arr[i][1];
+            int starti=arr[i][0], endi=arr[i][1];
             
-            if(si>e){
-                ans.push_back({s,e});
-                s=si;
+            if(starti>end){
+                ans.push_back({start,end});
+                start=starti;
             }
-            e=max(e,ei);
+            end=max(end,endi);
         }
-        ans.push_back({s,e});
+        ans.push_back({start,end});
         
         return ans;
     }
@@ -27,8 +27,8 @@ public:
         vector<vector<int>> ans = merge(meetings);
         
         int res = 0;
-        for(vector<int> d : ans){
-            int start = d[0], end = d[1];
+        for(auto i : ans){
+            int start = i[0], end = i[1];
             res += (end - start +1);
         } 
         
